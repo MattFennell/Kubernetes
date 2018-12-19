@@ -1,0 +1,7 @@
+.idea/
+*.xlsx
+out/
+gradle/
+.gradle/
+build/
+coverage/

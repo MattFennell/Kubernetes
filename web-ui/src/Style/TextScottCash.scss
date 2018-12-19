@@ -1,0 +1,31 @@
+@import'Colors.scss';
+h1#text-scott-cash {
+    margin: auto;
+    color: $color-white;
+    font-family: 'Fira Sans', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    letter-spacing: 1px;
+    text-shadow: 0.2px 0.2px 0px $color-white;
+    -webkit-transform: scale(1.1, 1);
+    -moz-transform: scale(1.1, 1);
+    -ms-transform: scale(1.1, 1);
+    -o-transform: scale(1.1, 1);
+    transform: scale(1.1, 1);
+    @media screen and (max-width: 1440px) {
+        font-size: 45px;
+    }
+    @media screen and (max-width: 1299px) {
+        font-size: 40px;
+    }
+    @media screen and (max-width: 999px) {
+        font-size: 25px;
+    }
+    @media screen and (max-width: 799px) {
+        font-size: 20px;
+    }
+    @media screen and (max-width: 599px) {
+        font-size: 16px;
+    }
+}

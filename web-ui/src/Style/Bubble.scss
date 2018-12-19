@@ -1,0 +1,290 @@
+@import'Colors.scss';
+/******** BUBBLE DIMENSIONS ********/
+
+@mixin dimensions-bubble($diameter) {
+    width: $diameter;
+    height: $diameter;
+}
+
+/* Desktop */
+
+$diameter-bubble-largest-desktop: 50vw;
+$diameter-bubble-medium-desktop: 37vw;
+$diameter-bubble-smallest-desktop: 33vw;
+/* Tablet */
+
+$diameter-bubble-largest-tablet: 85vw;
+$diameter-bubble-largest-tablet-max: 820px;
+$diameter-bubble-medium-tablet: 36vw;
+$diameter-bubble-smallest-tablet: 50vw;
+/* Standard Mobile */
+
+$diameter-bubble-largest-std-mobile: 125vw;
+$diameter-bubble-medium-std-mobile: 45vw;
+$diameter-bubble-smallest-std-mobile: 60vw;
+/* Small Mobile */
+
+$diameter-bubble-largest-sm-mobile: 170vw;
+$diameter-bubble-medium-sm-mobile: 70vw;
+$diameter-bubble-smallest-sm-mobile: 100vw;
+/******** BUBBLE POSITIONS ********/
+
+// Scale is a magic number, since 100vh is not actually 100% of height on mobile devices
+$magic-scale-number-sm-mobile: 3.12;
+$magic-scale-number-std-mobile-1: 2.085;
+$magic-scale-number-std-mobile-2: 3;
+@mixin position-bubble($positionLeft, $positionTop, $diameter, $scale: 2) {
+    left: calc(#{$positionLeft} - #{$diameter} / #{$scale});
+    top: calc(#{$positionTop} - #{$diameter} / #{$scale});
+}
+
+/* Desktop */
+
+$position-top-bubble-largest-desktop: 50vh;
+$position-left-bubble-largest-desktop: 50vw;
+$position-top-bubble-medium-desktop: 25vh;
+$position-left-bubble-medium-desktop: 15vw;
+$position-top-bubble-smallest-desktop: 74vh;
+$position-left-bubble-smallest-desktop: 84vw;
+/* Tablet */
+
+$position-top-bubble-largest-tablet: 50vh;
+$position-left-bubble-largest-tablet: 50vw;
+$position-top-bubble-medium-tablet: 8vh;
+$position-left-bubble-medium-tablet: 15vw;
+$position-top-bubble-smallest-tablet: 83vh;
+$position-left-bubble-smallest-tablet: 83vw;
+/* Standard Mobile */
+
+$position-top-bubble-largest-std-mobile: 53vh;
+$position-left-bubble-largest-std-mobile: 54vw;
+$position-top-bubble-medium-std-mobile: 11vh;
+$position-left-bubble-medium-std-mobile: 16vw;
+$position-top-bubble-smallest-std-mobile: 83vh;
+$position-left-bubble-smallest-std-mobile: 76vw;
+/* Small Mobile */
+
+$position-top-bubble-largest-sm-mobile: 65vh;
+$position-left-bubble-largest-sm-mobile: 50vw;
+$position-top-bubble-medium-sm-mobile: 30vh;
+$position-left-bubble-medium-sm-mobile: 26vw;
+$position-top-bubble-smallest-sm-mobile: 120vh;
+$position-left-bubble-smallest-sm-mobile: 95vw;
+/******** OTHER BUBBLE RELATED CSS ********/
+
+div#bubbles {
+    background-color: $color-white;
+}
+
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    display: flex;
+    &.bubble-largest {
+        background-color: $color-primary-turquoise;
+    }
+    &.bubble-medium {
+        background-color: $color-primary-hot-pink;
+    }
+    &.bubble-smallest {
+        background-color: $color-primary-light-blue;
+    }
+}
+
+/******** BUBBLES DESKTOP ********/
+
+.bubble.bubble-largest {
+    @include dimensions-bubble($diameter-bubble-largest-desktop);
+    @include position-bubble( $position-left-bubble-largest-desktop, $position-top-bubble-largest-desktop, $diameter-bubble-largest-desktop);
+}
+
+.bubble.bubble-medium {
+    @include dimensions-bubble($diameter-bubble-medium-desktop);
+    @include position-bubble( $position-left-bubble-medium-desktop, $position-top-bubble-medium-desktop, $diameter-bubble-medium-desktop);
+}
+
+.bubble.bubble-smallest {
+    @include dimensions-bubble($diameter-bubble-smallest-desktop);
+    @include position-bubble( $position-left-bubble-smallest-desktop, $position-top-bubble-smallest-desktop, $diameter-bubble-smallest-desktop);
+}
+
+/******** BUBBLES TABLET ********/
+
+@media screen and (max-width: 1440px) {
+    .bubble.bubble-largest {
+        @include dimensions-bubble($diameter-bubble-largest-tablet-max);
+        @include position-bubble( $position-left-bubble-largest-tablet, $position-top-bubble-largest-tablet, $diameter-bubble-largest-tablet-max);
+    }
+    .bubble.bubble-medium {
+        @include dimensions-bubble($diameter-bubble-medium-tablet);
+        @include position-bubble( $position-left-bubble-medium-tablet, $position-top-bubble-medium-tablet, $diameter-bubble-medium-tablet);
+    }
+    .bubble.bubble-smallest {
+        @include dimensions-bubble($diameter-bubble-smallest-tablet);
+        @include position-bubble( $position-left-bubble-smallest-tablet, $position-top-bubble-smallest-tablet, $diameter-bubble-smallest-tablet);
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .bubble.bubble-largest {
+        @include dimensions-bubble(calc(#{$diameter-bubble-largest-tablet-max} - 105px));
+        @include position-bubble( $position-left-bubble-largest-tablet, $position-top-bubble-largest-tablet, calc(#{$diameter-bubble-largest-tablet-max} - 105px));
+    }
+    .bubble.bubble-medium {
+        @include dimensions-bubble($diameter-bubble-medium-tablet);
+        @include position-bubble( calc(#{$position-left-bubble-medium-tablet} + 2vw), calc(#{$position-top-bubble-medium-tablet} + 4vw), $diameter-bubble-medium-tablet);
+    }
+    .bubble.bubble-smallest {
+        @include dimensions-bubble($diameter-bubble-smallest-tablet);
+        @include position-bubble( $position-left-bubble-smallest-tablet, $position-top-bubble-smallest-tablet, $diameter-bubble-smallest-tablet);
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .bubble.bubble-largest {
+        @include dimensions-bubble(calc(#{$diameter-bubble-largest-tablet} + 25vw));
+        @include position-bubble( $position-left-bubble-largest-tablet, $position-top-bubble-largest-tablet, calc(#{$diameter-bubble-largest-tablet} + 25vw));
+    }
+    .bubble.bubble-medium {
+        @include dimensions-bubble($diameter-bubble-medium-tablet);
+        @include position-bubble( $position-left-bubble-medium-tablet, $position-top-bubble-medium-tablet, $diameter-bubble-medium-tablet);
+    }
+    .bubble.bubble-smallest {
+        @include dimensions-bubble($diameter-bubble-smallest-tablet);
+        @include position-bubble( $position-left-bubble-smallest-tablet, $position-top-bubble-smallest-tablet, $diameter-bubble-smallest-tablet);
+    }
+}
+
+/******** BUBBLES STANDARD PHONE ********/
+
+@media screen and (max-width: 590px) {
+    .bubble.bubble-largest {
+        @include dimensions-bubble(110vw);
+        @include position-bubble( calc(#{$position-left-bubble-largest-std-mobile} - 4vw), $position-top-bubble-largest-std-mobile, calc(#{$diameter-bubble-largest-std-mobile} - 15vw), $magic-scale-number-std-mobile-1);
+    }
+    .bubble.bubble-medium {
+        @include dimensions-bubble($diameter-bubble-medium-std-mobile);
+        @include position-bubble( $position-left-bubble-medium-std-mobile, $position-top-bubble-medium-std-mobile, $diameter-bubble-medium-std-mobile, $magic-scale-number-std-mobile-1);
+    }
+    .bubble.bubble-smallest {
+        @include dimensions-bubble($diameter-bubble-smallest-std-mobile);
+        @include position-bubble( $position-left-bubble-smallest-std-mobile, $position-top-bubble-smallest-std-mobile, $diameter-bubble-smallest-std-mobile, $magic-scale-number-std-mobile-1);
+    }
+    @media screen and (min-height: 800px) {
+        .bubble.bubble-medium {
+            @include position-bubble( $position-left-bubble-medium-std-mobile, calc(#{$position-top-bubble-medium-std-mobile} + 3vh), $diameter-bubble-medium-std-mobile, $magic-scale-number-std-mobile-2);
+        }
+    }
+    @media screen and (max-height: 800px) {
+        .bubble.bubble-medium {
+            @include position-bubble( $position-left-bubble-medium-std-mobile, calc(#{$position-top-bubble-medium-std-mobile} - 5vh), $diameter-bubble-medium-std-mobile, $magic-scale-number-std-mobile-2);
+        }
+    }
+    @media screen and (max-height: 750px) {
+        .bubble.bubble-medium {
+            @include position-bubble( $position-left-bubble-medium-std-mobile, calc(#{$position-top-bubble-medium-std-mobile} - 8vh), $diameter-bubble-medium-std-mobile, $magic-scale-number-std-mobile-2);
+        }
+    }
+    @media screen and (max-height: 570px) {
+        .bubble.bubble-medium {
+            @include position-bubble( $position-left-bubble-medium-std-mobile, calc(#{$position-top-bubble-medium-std-mobile} - 13vh), $diameter-bubble-medium-std-mobile, $magic-scale-number-std-mobile-2);
+        }
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .bubble.bubble-largest {
+        @include dimensions-bubble($diameter-bubble-largest-std-mobile);
+        @include position-bubble( $position-left-bubble-largest-std-mobile, $position-top-bubble-largest-std-mobile, $diameter-bubble-largest-std-mobile, $magic-scale-number-std-mobile-1);
+    }
+    .bubble.bubble-medium {
+        @include dimensions-bubble($diameter-bubble-medium-std-mobile);
+        @include position-bubble( $position-left-bubble-medium-std-mobile, $position-top-bubble-medium-std-mobile, $diameter-bubble-medium-std-mobile, $magic-scale-number-std-mobile-1);
+    }
+    .bubble.bubble-smallest {
+        @include dimensions-bubble($diameter-bubble-smallest-std-mobile);
+        @include position-bubble( $position-left-bubble-smallest-std-mobile, $position-top-bubble-smallest-std-mobile, $diameter-bubble-smallest-std-mobile, $magic-scale-number-std-mobile-1);
+    }
+    @media screen and (min-height: 800px) {
+        .bubble.bubble-medium {
+            @include position-bubble( $position-left-bubble-medium-std-mobile, calc(#{$position-top-bubble-medium-std-mobile} + 4vh), $diameter-bubble-medium-std-mobile, $magic-scale-number-std-mobile-2);
+        }
+    }
+    @media screen and (max-height: 800px) {
+        .bubble.bubble-medium {
+            @include position-bubble( $position-left-bubble-medium-std-mobile, $position-top-bubble-medium-std-mobile, $diameter-bubble-medium-std-mobile, $magic-scale-number-std-mobile-2);
+        }
+    }
+    @media screen and (max-height: 750px) {
+        .bubble.bubble-medium {
+            @include position-bubble( $position-left-bubble-medium-std-mobile, calc(#{$position-top-bubble-medium-std-mobile} - 2vh), $diameter-bubble-medium-std-mobile, $magic-scale-number-std-mobile-2);
+        }
+    }
+    @media screen and (max-height: 670px) {
+        .bubble.bubble-medium {
+            @include position-bubble( $position-left-bubble-medium-std-mobile, calc(#{$position-top-bubble-medium-std-mobile} - 8vh), $diameter-bubble-medium-std-mobile, $magic-scale-number-std-mobile-2);
+        }
+    }
+    @media screen and (max-height: 560px) {
+        .bubble.bubble-medium {
+            @include position-bubble( $position-left-bubble-medium-std-mobile, calc(#{$position-top-bubble-medium-std-mobile} - 14vh), $diameter-bubble-medium-std-mobile, $magic-scale-number-std-mobile-2);
+        }
+    }
+}
+
+/******** BUBBLES SMALL PHONE ********/
+
+@media screen and (max-width: 390px) {
+    .bubble.bubble-largest {
+        @include dimensions-bubble($diameter-bubble-largest-sm-mobile);
+        @include position-bubble( $position-left-bubble-largest-sm-mobile, $position-top-bubble-largest-sm-mobile, $diameter-bubble-largest-sm-mobile, $magic-scale-number-sm-mobile);
+    }
+    .bubble.bubble-smallest {
+        @include dimensions-bubble($diameter-bubble-smallest-sm-mobile);
+        @include position-bubble( $position-left-bubble-smallest-sm-mobile, $position-top-bubble-smallest-sm-mobile, $diameter-bubble-smallest-sm-mobile, $magic-scale-number-sm-mobile);
+    }
+    .bubble.bubble-medium {
+        @include dimensions-bubble($diameter-bubble-medium-sm-mobile);
+    }
+    @media screen and (min-height: 810px) {
+        .bubble.bubble-medium {
+            @include position-bubble( $position-left-bubble-medium-sm-mobile, calc(#{$position-top-bubble-medium-sm-mobile} +4 vh), $diameter-bubble-medium-sm-mobile, $magic-scale-number-sm-mobile);
+        }
+        .bubble.bubble-smallest {
+            @include position-bubble( $position-left-bubble-smallest-sm-mobile, calc(#{$position-top-bubble-smallest-sm-mobile} - 8vh), $diameter-bubble-smallest-sm-mobile, $magic-scale-number-sm-mobile);
+        }
+    }
+    @media screen and (max-height: 810px) {
+        .bubble.bubble-medium {
+            @include position-bubble( $position-left-bubble-medium-sm-mobile, $position-top-bubble-medium-sm-mobile, $diameter-bubble-medium-sm-mobile, $magic-scale-number-sm-mobile);
+        }
+        .bubble.bubble-smallest {
+            @include position-bubble( $position-left-bubble-smallest-sm-mobile, calc(#{$position-top-bubble-smallest-sm-mobile} - 8vh), $diameter-bubble-smallest-sm-mobile, $magic-scale-number-sm-mobile);
+        }
+    }
+    @media screen and (max-height: 710px) {
+        .bubble.bubble-medium {
+            @include position-bubble( $position-left-bubble-medium-sm-mobile, calc(#{$position-top-bubble-medium-sm-mobile} -6vh), $diameter-bubble-medium-sm-mobile, $magic-scale-number-sm-mobile);
+        }
+    }
+    @media screen and (max-height: 610px) {
+        .bubble.bubble-medium {
+            @include position-bubble( $position-left-bubble-medium-sm-mobile, calc(#{$position-top-bubble-medium-sm-mobile} - 10vh), $diameter-bubble-medium-sm-mobile, $magic-scale-number-sm-mobile);
+        }
+    }
+    @media screen and (max-height: 560px) {
+        .bubble.bubble-medium {
+            @include position-bubble( $position-left-bubble-medium-sm-mobile, calc(#{$position-top-bubble-medium-sm-mobile} - 15vh), $diameter-bubble-medium-sm-mobile, $magic-scale-number-sm-mobile);
+        }
+    }
+    @media screen and (max-height: 510px) {
+        .bubble.bubble-medium {
+            @include position-bubble( $position-left-bubble-medium-sm-mobile, calc(#{$position-top-bubble-medium-sm-mobile} - 19vh), $diameter-bubble-medium-sm-mobile, $magic-scale-number-sm-mobile);
+        }
+    }
+    @media screen and (max-height: 400px) {
+        .bubble.bubble-medium {
+            @include position-bubble( $position-left-bubble-medium-sm-mobile, calc(#{$position-top-bubble-medium-sm-mobile} - 32vh), $diameter-bubble-medium-sm-mobile, $magic-scale-number-sm-mobile);
+        }
+    }
+}

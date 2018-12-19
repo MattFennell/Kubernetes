@@ -1,0 +1,153 @@
+@import'Colors.scss';
+$input-side-margin: 20px;
+@mixin input-margins {
+    margin-top: 37.82px;
+    margin-left: $input-side-margin;
+    margin-right: $input-side-margin;
+}
+
+h1,
+label,
+input,
+button,
+h1#greeting {
+    color: $color-white;
+    font-weight: bold;
+}
+
+label.error-text {
+    color: $color-error-text;
+    font-weight: initial;
+    text-align: center;
+    height: 17px;
+    width: stretch;
+    font-size: 90%;
+    margin-top: 6px;
+    margin-bottom: 10px;
+}
+
+form {
+    &#register-form,
+    &#login-form {
+        &>button {
+            display: table;
+            margin: 26px auto;
+            border-radius: 35px;
+            width: 160px;
+            font-weight: bold;
+            padding: 13px 16px;
+            &:focus {
+                outline: none;
+            }
+            &:hover {
+                color: $color-primary-hot-pink;
+            }
+            &.first {
+                color: $color-primary-turquoise;
+                border-color: $color-primary-turquoise;
+                background-color: $color-white;
+            }
+            &.second {
+                color: $color-white;
+                border-color: $color-white;
+            }
+        }
+    }
+}
+
+div {
+    &#login-form,
+    &#register-form {
+        margin: auto;
+    }
+}
+
+button {
+    &#btnLogin,
+    &#btnRegister {
+        font-size: 20px;
+    }
+}
+
+div.position-relative.form-group {
+    margin-bottom: 52px;
+}
+
+.position-relative.form-group {
+    margin-bottom: 0;
+    &>label {
+        display: block;
+    }
+}
+
+input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid $color-white;
+    box-shadow: none;
+    border-radius: 0;
+    height: 33px;
+    width: 278px;
+    font-weight: normal;
+    &:focus {
+        outline: none;
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    button#btnLogin,
+    button#btnRegister {
+        line-height: 1;
+        font-size: 18px;
+    }
+    h1#greeting {
+        font-size: 35.2px;
+    }
+    label {
+        font-size: 80%;
+        font-weight: initial;
+    }
+    input {
+        font-weight: initial;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 599px) {
+    h1#greeting {
+        font-size: 30px;
+    }
+    label {
+        font-size: 12px;
+        font-weight: initial;
+    }
+    button#btnLogin,
+    button#btnRegister {
+        line-height: 1;
+        font-size: 16px;
+        width: 120px;
+    }
+}
+
+@media screen and (max-width: 358px),
+screen and (max-height: 710px) {
+    h1#greeting {
+        font-size: 25px;
+        margin-top: 21px
+    }
+    label {
+        font-size: 12px;
+        font-weight: initial;
+    }
+    button#btnLogin,
+    button#btnRegister {
+        font-size: 14px;
+        line-height: 0.5;
+        width: 120px;
+        margin-top: 0px;
+        margin-bottom: 15px;
+    }
+    div.position-relative.form-group {
+        margin-bottom: 33px;
+    }
+}

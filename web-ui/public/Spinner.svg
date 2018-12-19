@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>Loading</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Transactions" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Transactions-desktop---Infinite-scroll-loader" transform="translate(-709.000000, -862.000000)" fill="#E04179">
+            <g id="Loading" transform="translate(709.000000, 862.000000)">
+                <path d="M14.3953963,-2.22787345e-05 L14.4740226,3.41018998 C8.3166583,3.68529165 3.40909091,8.7663075 3.40909091,14.9940052 C3.40909091,21.3980459 8.59851767,26.5895466 15,26.5895466 C21.4014823,26.5895466 26.5909091,21.3980459 26.5909091,14.9940052 C26.5909091,14.6083465 26.5720892,14.2270852 26.535318,13.8510903 L29.9628843,13.9301167 C29.9874901,14.2815472 30,14.6363147 30,14.9940052 C30,23.2815873 23.2842712,30 15,30 C6.71572875,30 0,23.2815873 0,14.9940052 C0,6.9090009 6.3914291,0.317391426 14.3953963,-2.22787344e-05 Z" id="Combined-Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

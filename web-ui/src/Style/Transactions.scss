@@ -1,0 +1,136 @@
+@import'Colors.scss';
+@mixin ellipsisOverflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+div#balance {
+    border-radius: 100%;
+    margin: auto;
+    position: absolute;
+    top: 40vh;
+}
+
+div#transaction-table {
+    font-family: 'Roboto', sans-serif;
+    color: $color-primary-violet;
+    padding: 0;
+    .table-responsive {
+        overflow-x: inherit;
+    }
+    tbody {
+        width: 100%;
+        display: block;
+    }
+    table {
+        // Can bring both sides of the table in here by reducing the width
+        width: 100%;
+        margin: 0 0 0 0;
+        display: block;
+    }
+    tr {
+        display: flex;
+        width: 100%;
+        height: 35px;
+        padding: 0;
+        td {
+            height: 100%;
+            padding: 3px;
+            border: none !important;
+            font-size: 18sp;
+            font-weight: 500;
+            line-height: 30px;
+        }
+        td:nth-child(1) {
+            padding-left: 8vw;
+        }
+        td:nth-child(2) {
+            flex-grow: 1;
+            padding-left: 20px;
+            vertical-align: bottom;
+        }
+        td:nth-child(3) {
+            padding-right: 8vw;
+        }
+    }
+    tr.transaction {
+        height: 50px;
+    }
+    tr.transaction:hover {
+        td {
+            background-color: $color-transaction-hover;
+        }
+    }
+    .date {
+        font-size: 16sp;
+        color: $color-transaction-text-date;
+    }
+    .date-row {
+        margin-top: 5px;
+    }
+    .transaction-currency {
+        font-size: 15px;
+        line-height: 40px;
+        white-space: nowrap;
+    }
+    .transaction-icon {
+        padding-top: 6px;
+    }
+    .payee {
+        line-height: 40px;
+        width: 100%;
+        @include ellipsisOverflow;
+    }
+    span .large {
+        font-size: 150%;
+        font-weight: 400;
+    }
+}
+
+body {
+    overflow: initial !important;
+}
+
+.table-responsive {
+    width: 100%;
+}
+
+#outer-account-balance {
+    width: 100%;
+    height: 100%;
+}
+
+#trans-columns {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+#transaction-table-row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+td.positive {
+    color: $color-transaction-positive;
+}
+
+div#trans-columns>h5 {
+    position: initial;
+    padding-bottom: 10px;
+    margin: auto;
+    display: table;
+    color: $color-primary-hot-pink;
+    &:last-child {
+        padding-bottom: 70px;
+    }
+}
+
+div.transaction-history-end {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    padding-top: 20vh;
+    padding-bottom: 58vh;
+    font-size: 24sp;
+    color: $color-transaction-text-date;
+}

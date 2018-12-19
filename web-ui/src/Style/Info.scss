@@ -1,0 +1,325 @@
+@import'Colors.scss';
+@mixin verticalSpacing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin offsetFromSides {
+  // Keep these equal
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.transaction-info-page {
+  height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  color: $color-primary-hot-pink;
+  font-size: 18px;
+  display: table;
+  margin-right: 0px;
+  margin-left: 0px;
+  font-weight: 400;
+  text-align: center;
+  width: 33%;
+  position: fixed;
+  border-left: 1px solid $color-shadow;
+  box-shadow: 9px -8px 25px -6px $color-shadow;
+  background-color: $color-white;
+
+  .transaction-note-container {
+    display: flex;
+    flex-direction: column;
+
+    .error-message {
+      margin: 0 10%;
+      text-align: left;
+      font-size: 15px;
+      font-weight: bold;
+      margin-bottom: 0.5vh;
+    }
+  }
+}
+
+.Category {
+  margin-top: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 70%;
+}
+
+.Date {
+  @include verticalSpacing;
+  font-size: 15px;
+}
+
+.payeeName {
+  @include verticalSpacing;
+  font-size: 21px;
+  margin-left: 5%;
+  margin-right: 5%;
+  font-weight: 450;
+}
+
+.amount {
+  @include verticalSpacing;
+  font-size: 21px;
+}
+
+.address {
+  margin-top: 1vh;
+  @include verticalSpacing;
+  font-size: 16px;
+  white-space: pre-wrap;
+}
+
+.payee-history {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  font-size: 16px;
+  @include offsetFromSides;
+  color: $color-primary-hot-pink-05-alpha;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid $color-linebreak-color;
+  margin-right: 40%;
+  margin-left: 40%;
+  padding: 0;
+}
+
+.flex-container {
+  display: flex;
+  @include offsetFromSides;
+  text-align: left;
+  align-items: center;
+}
+
+.flex-container>div {
+  margin: 10px; // Adds spacing around the flex grids
+  text-align: left;
+}
+
+.number-of-visits-text {
+  flex: 3;
+  text-align: left;
+  margin-left: 0 !important;
+  align-items: center;
+}
+
+.number-of-visits-value {
+  flex: 2;
+  text-align: right !important;
+  align-items: center;
+}
+
+#btnAddNote {
+  display: table;
+  margin: 0 auto;
+  border-radius: 30px;
+  width: 9vw;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 1vh 2vw;
+  color: $color-white;
+  background-color: $color-primary-hot-pink;
+  align-items: center;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background-color: $color-primary-violet-light;
+  }
+}
+
+.closeButton {
+  margin-top: 10vh;
+  margin-right: 20%;
+  margin-left: 80%;
+  .round {
+    border-radius: 50%;
+    display: table;
+    font-size: 20px;
+    font-weight: 100;
+    color: $color-primary-hot-pink;
+    border-color: $color-primary-hot-pink;
+    align-items: center;
+    height: 5vh;
+    width: 5vh;
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      color: $color-primary-violet-light;
+    }
+    padding: 0.5vh 0px 0px 0px;
+  }
+}
+
+div.amount,
+p {
+  line-height: initial;
+}
+
+.span {
+  vertical-align: middle;
+}
+
+.transaction-header-info {
+  span .large {
+    font-size: 150%;
+    font-weight: 400;
+  }
+  span.small {
+    font-size: 90%;
+  }
+  span.small-secondary {
+    font-size: 90%;
+  }
+  
+}
+
+.payee-info-summary p {
+  line-height: 1.9;
+}
+
+.note {
+  justify-content: space-between;
+  height: 35px;
+
+  &.confirmed {
+    border-bottom: 1px solid $color-white;
+  }
+
+  &.note-form {
+    border-bottom: 1px solid $color-primary-hot-pink;
+
+    input {
+      color: $color-primary-hot-pink;
+      padding: 0 0 0 6px;
+      font-size: 18px;
+      width: 100%;
+      border: 0;
+    }
+
+    .note-button-group {
+      margin: 0 0 0 10px;
+
+      .add-note-button {
+        font-weight: bold;
+        cursor: pointer;
+        margin: 16px;
+
+        &.disabled {
+          color: $color-primary-hot-pink-05-alpha;
+          cursor: default;
+        }
+      }
+
+      .loading-spinner-container {
+        margin: 16px;
+      }
+    }
+  }
+
+  .note-icon {
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
+
+    &.disabled {
+      cursor: default;
+    }
+  }
+
+  .note-text {
+    margin: 0;
+    padding: 0 6px;
+    flex-grow: 2;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+.loading-spinner {
+  -webkit-animation: spin 1.5s linear infinite;
+  -moz-animation: spin 1.5s linear infinite;
+  animation: spin 1.5s linear infinite;
+  height: 24px;
+  width: 24px;
+}
+
+.loading-spinner-container-balance {
+  text-align: center
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.category-header {
+  font-size: 14px;
+}
+.category-menu-toggle {
+  color: $color-primary-hot-pink;
+  outline:0;
+  align-content: center;
+  padding:0px;
+  margin:0px;
+  background: none;
+
+}
+.category-menu-toggle:focus {
+  color: $color-primary-hot-pink;
+}
+.category-menu-toggle:hover {
+  color: $color-primary-hot-pink;
+}
+
+.menu-items:hover {
+  background: $color-grey-light;
+}
+
+.category-menu-item-false {
+  color: $color-primary-violet-light;
+  border:0;
+  outline:0;
+  background: none;
+  font-weight: normal;
+}
+
+.category-menu-item-true {
+  color: $color-transaction-text-date;
+  border:0;
+  outline:0;
+  background: none;
+  font-weight: normal;
+}
+.category-menu {
+  min-width: 0px;
+}
+
+.category-change-error {
+  font-weight: bold;
+  min-height:24px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

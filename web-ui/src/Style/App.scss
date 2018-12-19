@@ -1,0 +1,65 @@
+@import 'Colors.scss';
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $color-white;
+  overflow: hidden;
+  font-family: 'Roboto', sans-serif;
+}
+
+.unselectable {
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+/Edge */
+  user-select: none;
+  /* Standard */
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.shadow {
+  box-shadow: 0 0 25px $color-shadow;
+}
+
+div#custom-container {
+  background-color: $color-white;
+  border-radius: 5px;
+  margin-top: 120px;
+}
+
+.container {
+  margin: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  width: 100%;
+}
+
+#transaction-table {
+  width: 100%;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.list-of-transactions,
+.transaction-info-screen {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.row {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.transaction-list-left {
+  padding-left: 0px;
+  padding-right: 0px;
+  line-height: 0px;
+}

@@ -1,0 +1,37 @@
+{
+  "name": "mocha-chai_testing",
+  "description": "",
+  "scripts": {
+    "mocha": "mocha --require babel-core/register --require babel-polyfill",
+    "mocha:ci": "mocha --require babel-core/register --require babel-polyfill --reporter mochawesome",
+    "babel": "babel-node --presets env"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "bcrypt": "^3.0.1",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "chai-match-pattern": "^1.1.0",
+    "delay": "^4.0.1",
+    "jsonwebtoken": "^8.3.0",
+    "mariadb": "^2.0.0-alpha",
+    "mocha": "^5.2.0",
+    "mochawesome": "^3.1.1",
+    "moment": "^2.22.2",
+    "randomstring": "^1.1.5",
+    "url-join": "^4.0.0",
+    "uuid": "^3.3.2"
+  },
+  "dependencies": {
+    "chai-json-pattern": "^1.1.0",
+    "chai-things": "^0.2.0"
+  }
+}

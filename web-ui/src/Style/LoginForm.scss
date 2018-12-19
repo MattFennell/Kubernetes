@@ -1,0 +1,25 @@
+@import'Form.scss';
+div>form#login-form {
+    &#login-input-fields {
+        @include input-margins;
+        margin-top: 37.82px;
+        @media screen and (max-width: 358px), screen and (max-height: 710px) {
+            font-size: 25px;
+            margin-top: 46px;
+        }
+    }
+    &>button {
+        &#btnLogin {
+            margin-top: 16.83px;
+            margin-bottom: 25px;
+        }
+        &.second {
+            background-color: $color-primary-turquoise;
+        }
+        &.first {
+            color: $color-primary-turquoise;
+            border-color: $color-primary-turquoise;
+            background-color: $color-white;
+        }
+    }
+}

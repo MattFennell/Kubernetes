@@ -1,0 +1,190 @@
+@import'Colors.scss';
+div#midOptions {
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+div#header {
+    z-index: 1;
+    position: fixed;
+    width: 100%;
+    &>div {
+        width: 100%;
+        border-bottom: 1px solid $color-shadow;
+        background-color: $color-white;
+        &>div.row {
+            &>div {
+                &>h6 {
+                    color: $color-primary-turquoise;
+                    position: initial;
+                    display: table;
+                    margin: auto;
+                    padding-top: 21.5px;
+                    font-weight: 400;
+                }
+                &>button {
+                    border: 1px solid $color-primary-violet;
+                    border-radius: 35px;
+                    margin: 13px 0px;
+                    margin-left: 12px;
+                    margin-right: 12px;
+                    padding: 3px 16px;
+                    font-weight: 400;
+                    color: $color-primary-violet;
+                    background-color: $color-white;
+                    border-color: $color-primary-violet;
+                    &:focus {
+                        outline: none;
+                    }
+                    &.selected {
+                        background-color: $color-primary-violet;
+                        color: $color-white;
+                        right: 50vw;
+                    }
+                    &.no-transactions {
+                        background-color: $color-white;
+                        color: $color-grey-dark;
+                        border-color: $color-grey-dark;
+                        pointer-events: none;
+                    }
+                    &:first-child {
+                        margin-left: calc(50vw - 58px);
+                    }
+                    &:last-child {
+                        margin-right: calc(50vw - 54px);
+                    }
+                }
+            }
+        }
+    }
+}
+
+div#account {
+    display: inline-flex;
+    margin: auto;
+}
+
+div#avatar {
+    border-radius: 35px;
+    background-color: $color-grey-dark;
+    width: 35px;
+    height: 35px;
+}
+
+h5#name {
+    color: $color-primary-violet;
+    margin-left: 15px;
+    margin-right: 15px;
+    position: inherit;
+    top: inherit;
+    margin-top: 12px;
+    margin-bottom: 8px;
+}
+
+i.fa.fa-caret-down {
+    margin-top: 9px;
+    margin-bottom: 7px;
+    margin-right: 25px;
+    font-size: 16pt;
+    color: $color-grey-dark;
+}
+
+div {
+    &#transactions,
+    &#settings,
+    &#categories {
+        background-color: $color-white;
+        display: inline-flex;
+        margin-right: 33px;
+        border-bottom: 5px solid $color-white;
+        padding-top: 15px;
+        padding-bottom: 8px;
+        opacity: 0.4;
+        &.selected {
+            border-bottom: 4px solid $color-primary-violet;
+            opacity: 1;
+        }
+    }
+    &>div>h6 {
+        margin: auto;
+        margin-left: 5px;
+        font-weight: bold;
+        color: $color-primary-violet;
+        .message-for-no-header {
+            font-size: 18px;
+        }
+    }
+}
+
+img#appIcon {
+    width: 40px;
+    height: 40px;
+    margin: auto;
+    margin-left: 20px;
+}
+
+.unselectable.row {
+    margin-right: 0px;
+    margin-left: 0px;
+    display: flex;
+}
+
+.months.unselectable.row {
+    overflow: hidden;
+    height: 55px;
+    white-space: nowrap;
+}
+
+.col-lg-2,
+.col-lg-9 {
+    display: flex;
+}
+
+.col-lg-12 {
+    padding: 0;
+}
+
+img {
+    height: 37px;
+}
+
+.categories-user.unselectable.row {
+    height: 65px;
+}
+
+tr.selectedMonth,
+tr.selectedMonth>td.date {
+    -webkit-animation: pulse 3s;
+    -moz-animation: pulse 3s;
+    -ms-animation: pulse 3s;
+    -o-animation: pulse 3s;
+    animation: pulse 3s;
+    -webkit-animation-delay: 0.3s;
+    -moz-animation-delay: 0.3s;
+    -ms-animation-delay: 0.3s;
+    -o-animation-delay: 0.3s;
+    animation-delay: 0.3s;
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        color: $color-transaction-text-date;
+        background-color: $color-white;
+    }
+    50.0% {
+        color: $color-white;
+        background-color: $color-primary-hot-pink;
+    }
+    100.0% {
+        color: $color-transaction-text-date;
+        background-color: $color-white;
+    }
+}
+
+.message-for-no-header {
+    font-size: 18px;
+}

@@ -1,0 +1,93 @@
+buildscript {
+    repositories {
+        maven { url 'https://repo.spring.io/libs-milestone' }
+    }
+
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.1.0.M4'
+    }
+}
+
+
+group 'uk.co.scottlogic.gradProject'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'jacoco'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+bootJar {
+    baseName = 'Grad-bank-app'
+    version = '0.1.0'
+    launchScript()
+}
+
+jacoco {
+    toolVersion = '0.8.2'
+    // These MUST remain in " to allow interpolation
+    reportsDir = file("${buildDir}/test-results/coverage")
+}
+
+test {
+}
+
+check.enabled true
+check.dependsOn cleanTest
+check.dependsOn test
+check.dependsOn jacocoTestReport
+check.dependsOn jacocoTestCoverageVerification
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {  // TODO: Add tests for all classes and slowly raise this limit until it meets 90%
+            limit {
+                counter = 'BRANCH'
+                minimum = 0.50
+            }
+        }
+        rule {  // TODO: Add tests for all classes and slowly raise this limit until it meets 70%
+            limit {
+                counter = 'INSTRUCTION'
+                minimum = 0.50
+            }
+        }
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.destination file("${buildDir}/reports/tests/coverage")
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'http://maven.springframework.org/milestone/' }
+}
+
+dependencies {
+    compile 'com.auth0:java-jwt:3.4.0'
+    compile 'io.springfox:springfox-swagger-ui:2.9.2'
+    compile 'io.springfox:springfox-swagger2:2.9.2'
+    compile 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
+    compile 'joda-time:joda-time:2.10'
+    compile 'org.mariadb.jdbc:mariadb-java-client:2.3.0'
+    compile 'org.springframework.boot:spring-boot-devtools:2.1.0.M4'
+    compile 'org.springframework.boot:spring-boot-gradle-plugin:2.1.0.M4'
+    compile 'org.springframework.boot:spring-boot-starter:2.1.0.M4'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa:2.1.0.M4'
+    compile 'org.springframework.boot:spring-boot-starter-parent:2.1.0.M4'
+    compile 'org.springframework.boot:spring-boot-starter-security:2.1.0.M4'
+    compile 'org.springframework.boot:spring-boot-starter-web:2.1.0.M4'
+    compile 'org.springframework.security:spring-security-core:5.1.0.RC2'
+    compile 'org.springframework.security:spring-security-crypto:5.1.0.RC2'
+    compile 'org.springframework.security:spring-security-web:5.1.0.RC2'
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    testCompile 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+    testCompile 'org.mockito:mockito-core:2.22.0'
+    testCompile 'org.springframework.boot:spring-boot-starter-test:2.1.0.M4'
+}

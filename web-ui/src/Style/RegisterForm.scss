@@ -1,0 +1,63 @@
+@import'Form.scss';
+div>form#register-form {
+  &#register-input-fields {
+    @include input-margins;
+    margin-top: 21.82px;
+    margin-bottom: 45px;
+  }
+  &>button {
+    &.second {
+      background-color: $color-primary-turquoise;
+    }
+    &.first {
+      color: $color-primary-turquoise;
+      border-color: $color-primary-turquoise;
+      background-color: $color-white;
+    }
+  }
+}
+
+div#register-input-fields>div {
+  &.first-name,
+  &.surname,
+  &.username,
+  &.passcode {
+    width: calc(50% - 15px);
+    float: left;
+  }
+  &>input {
+    width: 132px;
+  }
+}
+
+.position-relative.form-group {
+  margin-left: 7px;
+  margin-right: 7px;
+}
+
+div#register-input-fields>div>input#email {
+  width: 279px;
+}
+
+@media screen and (max-width: 599px) {
+  .position-relative.form-group {
+    margin-bottom: 28px;
+  }
+  div#register-input-fields {
+    margin-top: 0px;
+  }
+  label.error-text {
+    margin-bottom: 10px;
+  }
+  button#btnLogin,
+  button#btnRegister {
+    margin-bottom: 5px;
+  }
+}
+
+@media screen and (max-width: 358px),
+screen and (max-height: 710px) {
+  .position-relative.form-group {
+    margin-bottom: 33px;
+  }
+}
