@@ -23,19 +23,23 @@ This was a bit tricky to sort, but these are some helpers. You may need to go in
 1. Open Powershell as admin
 1. Run `Get-NetAdapter`
 1. Execute `New-VMSwitch –Name "minikube" –AllowManagement $True –NetAdapterName "INSERT_HERE_ADAPTER"` but enter in the correct adapter based of the names of the network adapters. I used `Ethernet`.
-1. Start minikube with `minikube start --vm-driver=hyperv --hyperv-virtual-switch=minikube --v=7 --alsologtostderr`
-1. Now it should be configured. If not, have a look at the link above as it provides some extra information.
+1. From a Git Bash terminal with Admin privileges run `minikube start --vm-driver=hyperv --hyperv-virtual-switch=minikube --v=7 --alsologtostderr`
+1. Now it should be configured. If not, have a look at the link above as it provides some extra information. If it's running correctly, `minikube status` should result in seeing
+  - `host: Running`
+  - `kubelet: Running`
+  - `apiserver: Running`
+  - `kubectl: Correctly Configured: pointing to minikube-vm at XXX`
 
 
 #### Running Kubernetes locally in Minikube
 
-Assuming you can get Minikube running locally, then run the following commands from the root directory of this repo.
+Assuming you can get Minikube running locally, then run the following commands from the root directory of this repo from a Git Bash terminal with Admin privileges. 
 
 1.  `minikube start --vm-driver=hyperv --hyperv-virtual-switch=minikube --v=7 --alsologtostderr`
-1.  `kubectl apply -f k8s`
+1.  `kubectl apply -f k8s` (Should see several types of files being created)
 1.  `minikube ip`
 
-And then you should be able to access the service at the IP address returned from `minikube ip`. 
+And then you should be able to access the service at the IP address returned from `minikube ip`. To check that it's working, running `kubectl get pods` and you should see the client, server and sql deployments.
 
 #### Deploying the App onto Google Cloud Platform
 
@@ -58,4 +62,10 @@ Often when attempting to start or delete minikube, it would provide an error mes
 1. Disable Hyper-V and restart
 1. Go to C:/Users/USERNAME and delete the .minikube directory
 1. Turn on Hyper-V and restart
-1. 
+1. Open Hyper-V manager and click Virtual Switch Manager on the right
+1. Remove the minikube switch
+1. Open Powershell as admin
+1. Run `New-VMSwitch –Name "minikube" –AllowManagement $True –NetAdapterName "INSERT_HERE_ADAPTER"` as before, replacing the NetAdapterName
+1. Open Git Bash as admin and run `minikube start --vm-driver=hyperv --hyperv-virtual-switch=minikube --v=7 --alsologtostderr
+`
+
