@@ -1,4 +1,4 @@
-# Kubernetes on Google Cloud Platform
+# Using Google's Kubernetes engine
 This README describes how to run the Grad Bank App using Kubernetes on Google Cloud Platform as well as locally with Minikube.
 
 ### Contents
@@ -9,6 +9,7 @@ This README describes how to run the Grad Bank App using Kubernetes on Google Cl
   * [**Creating the Cluster**](#creating-the-cluster)
   * [**Applying the Config files**](#applying-the-config-files)
 * [**Issues encountered**](#issues-encountered)
+* [**Current unknowns**](#current-unknowns)
   
 -----
 
@@ -50,6 +51,8 @@ Assuming you can get Minikube running locally, then run the following commands f
 1.  `minikube ip`
 
 And then you should be able to access the service at the IP address returned from `minikube ip`. To check that it's working, running `kubectl get pods` and you should see the client, server and sql deployments and their status. It may take a minute or two for the pods to load up. For more information about a pod, run `kubectl logs POD-NAME`.
+
+-----
 
 ### Deploying the App onto Google Cloud Platform
 First you will need to create an account and set up a billing method. With Google Cloud Platform you get £237.51 worth of usage for free to be used within a year (just remember to shut down all clusters once finished). 
@@ -99,6 +102,6 @@ Often when attempting to start or delete minikube, it would provide an error mes
 1. Open Git Bash as admin and run `minikube start --vm-driver=hyperv --hyperv-virtual-switch=minikube --v=7 --alsologtostderr
 `
 
-#### Current unknowns
+##### Current unknowns
 So far I have not yet managed to figure out how to get connect to the SQL Database stored on the Google Cloud Platform, and all of the Postman requests sent to the service return 403's so I am unable to make Categories, Payees or Transactions. I think access to this stuff is tied down by Google and requires access to be explicitly allowed.
 
