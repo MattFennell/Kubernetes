@@ -19,4 +19,4 @@ spec:
             - containerPort: 5000
           env:
             - name: PROXY
-              value: http://123.456.789:8080
+              value: http://server-cluster-ip-service:8080

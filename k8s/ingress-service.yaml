@@ -25,9 +25,5 @@ spec:
             backend:
               serviceName: server-cluster-ip-service
               servicePort: 8080 # Server port
-          - path: /database/
-            backend:
-              serviceName: sql-cluster-ip-service
-              servicePort: 3306 # Server port
 
 #https://192.168.48.192/api/swagger-ui.html
