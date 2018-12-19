@@ -6,7 +6,7 @@ Initially it is best to get the application running locally on Minikube. To buil
 
 
 
-[**Create a new Policy**]
+#### Building the docker images
 
 
 
