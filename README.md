@@ -49,3 +49,13 @@ To run it on Google, I used the in build cloud shell and cloned this git repo. T
 1. `helm init --service-account tiller --upgrade`
 1.  `helm install stable/nginx-ingress --name my-nginx --set rbac.create=true`
 1.  `helm init --service-account tiller --upgrade`
+
+
+#### Annoying issues
+
+Often when attempting to start or delete minikube, it would provide an error message saying that the `config.json` file cannot be found. There may be better workarounds, but my fix was achieved by following these steps.
+
+1. Disable Hyper-V and restart
+1. Go to C:/Users/USERNAME and delete the .minikube directory
+1. Turn on Hyper-V and restart
+1. 
