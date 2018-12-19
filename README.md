@@ -18,7 +18,9 @@ Inside the `web-services` directory, run the following, replacing `username` wit
 
   1. `docker build -t username/web-services:latest --network=host .`
   1. `docker push username/web-services:latest`
+  
 Inside the `web-ui` directory, run the following, again replacing `username` with your docker username
+
   1. `docker build -t username/web-ui:latest .`
   1. `docker push username/web-ui:latest`  
   
