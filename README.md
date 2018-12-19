@@ -13,7 +13,7 @@ Inside the `web-ui` directory, run the following, again replacing `username` wit
 #### Setting up Minikube locally
 This was a bit tricky to sort, but these are some helpers. You may need to go into the BIOS to enable Virtualisation, and you will need to enable HyperV in Windows. I essentially just followed the steps in https://learnk8s.io/blog/installing-docker-and-kubernetes-on-windows, but below is a condensed version of them (I think).
 
-1. Start cmd.exe as admin
+1. Start `cmd.exe` as admin
 1. Install Chocolatey by executing `@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"`
 1. Install docker - `choco install docker-for-windows -y`. You may need to restart laptop and enable Hyper-V
 1. This should return an empty list if it's working `docker ps`
