@@ -37,6 +37,8 @@ Assuming you can get Minikube running locally, then run the following commands f
 
 And then you should be able to access the service at the IP address returned from `minikube ip`. 
 
+#### Deploying the App onto Google Cloud Platform
+
 To run it on Google, I used the in build cloud shell and cloned this git repo. Then again I ran `kubectl apply -f k8s` to start the services. However the routing for Google requires some extra setup. These commands did the trick:
 
 1. `curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh`
