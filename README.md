@@ -10,4 +10,6 @@ If you have Minikube working locally, then you can be in the root directory and 
 And then you should be able to access the service at the IP address returned from `minikube ip`
 
 
-I found https://learnk8s.io/blog/installing-docker-and-kubernetes-on-windows extremely useful for getting Minikube set up locally on Windows - could usually only ever get it running when starting it in debug mode
+I found https://learnk8s.io/blog/installing-docker-and-kubernetes-on-windows extremely useful for getting Minikube set up locally on Windows - could usually only ever get it running when starting it in debug mode.
+
+To run it on Google, I used the in build cloud shell and cloned this git repo. Then again I ran `kubectl apply -f k8s` and it started all of the services
