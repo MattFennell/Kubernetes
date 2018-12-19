@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sql-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: sql
+  template:
+    metadata:
+      labels:
+        component: sql
+    spec:
+      volumes:
+        - name: sql-storage # Just allocates storage
+          persistentVolumeClaim:
+            claimName: database-persistent-volume-claim
+      containers:
+        - name: sql
+          image: mariadb # https://hub.docker.com/_/mariadb/
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: sql-storage
+              mountPath: /var/lib/mysql/data # I think mariadb by default uses /var/lib/mysql, so have added a /data directory
+          env:
+            # Not sure about all of these
+            - name: MYSQL_ROOT_PASSWORD # info at https://hub.docker.com/_/mariadb/
+              value: passwd
+            - name: MYSQL_USER
+              value: gradapp
+            - name: MYSQL_PASSWORD
+              value: passwd
+            - name: MYSQL_DATABASE
+              value: gradapp # name of the schema?
+            - name: MYSQL_ROOT_HOST
+              value: sql-cluster-ip-service
+            - name: MYSQL_PORT
+              value: "3306"

@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    # nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - http:
+        paths:
+          - path: / # Matches requests directly to the ip to port 3000
+            backend:
+              serviceName: client-cluster-ip-service
+              servicePort: 5000 # Client is exposing port 3000
+          - path: /api/
+            backend:
+              serviceName: server-cluster-ip-service
+              servicePort: 8080 # Server port
+          - path: /swagger-ui.html
+            backend:
+              serviceName: server-cluster-ip-service
+              servicePort: 8080 # Server port
+          - path: /webjars/
+            backend:
+              serviceName: server-cluster-ip-service
+              servicePort: 8080 # Server port
+
+#https://192.168.48.192/api/swagger-ui.html

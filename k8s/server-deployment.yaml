@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: server
+  template:
+    metadata:
+      labels:
+        component: server
+    spec:
+      containers:
+        - name: server
+          image: pampoomio/web-services:latest # GET BACKEND SERVER IMAGE
+          ports:
+            - containerPort: 8080
+          env:
+            - name: JWT_SECRET
+              value: asfasdjkndskjfnkdsafjnfdskjfsdakasfnjfsakjfsankasfnafdsknfsakfasnksldgajbngsdakgdsakdsagfnkgsadgfkandsgfkjgdsankgdsajngsdak
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: passwd
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mariadb://sql-cluster-ip-service:3306/gradapp
+            - name: SPRING_DATASOURCE_USERNAME
+              value: gradapp
+# kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/mandatory.yaml
+# minikube addons enable ingress
