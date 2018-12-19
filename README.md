@@ -14,7 +14,7 @@ This README describes how to run the Grad Bank App using Kubernetes on Google Cl
 -----
 
 ### Building the docker images
-Inside the `web-services` directory, run the following, replacing `username` with your docker username. This should build the Client and Service images, and then push them to DockerHub. There are more instructions for pushing images to DockerHub at https://hackernoon.com/publish-your-docker-image-to-docker-hub-10b826793faf
+Inside the `web-services` directory, run the following, replacing `username` with your docker username. This should build the Client and Service images, and then push them to DockerHub. There are more instructions for pushing images to DockerHub at https://hackernoon.com/publish-your-docker-image-to-docker-hub-10b826793faf. This stage is not necessary as you can just use the images I have put on DockerHub.
 
   1. `docker build -t username/web-services:latest --network=host .`
   1. `docker push username/web-services:latest`
@@ -52,7 +52,7 @@ Assuming you can get Minikube running locally, then run the following commands f
 1.  `kubectl apply -f k8s` (Should see several types of files being created)
 1.  `minikube ip`
 
-And then you should be able to access the service at the IP address returned from `minikube ip`. To check that it's working, running `kubectl get pods` and you should see the client, server and sql deployments and their status. It may take a minute or two for the pods to load up. For more information about a pod, run `kubectl logs POD-NAME`.
+And then you should be able to access the service at the IP address returned from `minikube ip`. To check that it's working, running `kubectl get pods` and you should see the client, server and sql deployments and their status. It may take a minute or two for the pods to load up. For more information about a pod, run `kubectl logs POD-NAME`. Note that this will use my images on DockerHub unless you have changed the config files and replaced them with your own.
 
 -----
 
