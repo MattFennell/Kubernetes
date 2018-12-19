@@ -5,11 +5,11 @@ This README describes how to run the Grad Bank App on Kubernetes on Google Cloud
 
 Inside the `web-services` directory, run the following, replacing `username` with your docker username. This should build the Client and Service images, and then push them to DockerHub. There are more instructions for pushing images to DockerHub at https://hackernoon.com/publish-your-docker-image-to-docker-hub-10b826793faf
 
-  - `docker build -t username/web-services:latest --network=host .`
-  - `docker push username/web-services:latest`
+  1. `docker build -t username/web-services:latest --network=host .`
+  1. `docker push username/web-services:latest`
 Inside the `web-ui` directory, run the following, again replacing `username` with your docker username
-  - `docker build -t username/web-ui:latest .`
-  - `docker push username/web-ui:latest`  
+  1. `docker build -t username/web-ui:latest .`
+  1. `docker push username/web-ui:latest`  
   
 #### Setting up Minikube locally
 
