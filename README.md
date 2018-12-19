@@ -38,10 +38,10 @@ Assuming you can get Minikube running locally, then run the following commands f
 1.  `kubectl apply -f k8s` (Should see several types of files being created)
 1.  `minikube ip`
 
-And then you should be able to access the service at the IP address returned from `minikube ip`. To check that it's working, running `kubectl get pods` and you should see the client, server and sql deployments and their status. It may take a minute or 2 for the pods to load up. For more information about a pod, run `kubectl logs POD-NAME`.
+And then you should be able to access the service at the IP address returned from `minikube ip`. To check that it's working, running `kubectl get pods` and you should see the client, server and sql deployments and their status. It may take a minute or two for the pods to load up. For more information about a pod, run `kubectl logs POD-NAME`.
 
 #### Deploying the App onto Google Cloud Platform
-To run it on Google, I used the in build cloud shell and cloned this git repo. Then again I ran `kubectl apply -f k8s` to start the services. However the routing for Google requires some extra setup. These commands did the trick:
+To run it on Google, I used the in built cloud shell and cloned this git repo. Then again I ran `kubectl apply -f k8s` to start the services. However the routing for Google requires some extra setup. These commands did the trick:
 
 1. `curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh`
 1. `chmod 700 get_helm.sh`
