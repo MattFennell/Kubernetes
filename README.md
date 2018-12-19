@@ -41,17 +41,40 @@ Assuming you can get Minikube running locally, then run the following commands f
 And then you should be able to access the service at the IP address returned from `minikube ip`. To check that it's working, running `kubectl get pods` and you should see the client, server and sql deployments and their status. It may take a minute or two for the pods to load up. For more information about a pod, run `kubectl logs POD-NAME`.
 
 #### Deploying the App onto Google Cloud Platform
-To run it on Google, I used the in built cloud shell and cloned this git repo. Then again I ran `kubectl apply -f k8s` to start the services. However the routing for Google requires some extra setup. These commands did the trick:
 
+First you will need to create an account and set up a billing method. With Google Cloud Platform you get £237.51 worth of usage for free to be used within a year (just remember to shut down all clusters once finished). 
+
+##### Creating the Cluster
+1. Go to the Kubernetes Engine page and click `Create cluster`
+1. Name it as you like. 
+1. Location type = `Zonal`
+1. Zone = `europe-west1-b`
+1. Master version = `1.10.9-gke.5`
+1. Number of nodes = 1
+1. Machine type = `2 vCPU` (Necessary or you'll run out of CPU)
+1. Click create and wait a few minutes for it to be created (may need to refresh page)
+
+
+#### Applying the config files
+To run it on Google, I used the in built cloud shell and cloned this git repo. Then again I ran `kubectl apply -f k8s` to start the services. However the routing for Google requires some extra setup. Following these steps should deploy the app:
+
+1. Once the cluster has been created, click the connect button on the right and then click `Run in Cloud Shell`.
+1. Press enter to run the auto generated command
+1. `git clone https://github.com/MattFennell/Kubernetes.git`
+1. `cd Kubernetes/`
 1. `curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh`
 1. `chmod 700 get_helm.sh`
 1. `./get_helm.sh`
-1. ` kubectl create serviceaccount --namespace kube-system tiller`
+1. `kubectl create serviceaccount --namespace kube-system tiller`
 1. `kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller`
 1. `helm init --service-account tiller --upgrade`
-1.  `helm install stable/nginx-ingress --name my-nginx --set rbac.create=true`
-1.  `helm init --service-account tiller --upgrade`
+1.  `helm install stable/nginx-ingress --name my-nginx --set rbac.create=true` (May need to type this one out)
+1. `kubectl apply -f k8s`
+1. `kubectl get pods` should tell inform you if the pods are running or are pending
+1. Go to the `Services` tab on the left
+1. Click the endpoint for the row named `my-nginx-nginx-ingress-controller` and it the application should open. 
 
+If there seems to be an error, investigate the logs of the services through the CLI with kubectl, or have a look at the `workloads` tab on the left. It may say that there is not enough CPU available in which case you'll need to recreate the cluster, allocating more CPU.
 
 #### Issues encountered
 Often when attempting to start or delete minikube, it would provide an error message saying that the `config.json` file cannot be found. There may be better workarounds, but my fix was achieved by following these steps.
