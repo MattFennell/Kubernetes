@@ -1,4 +1,4 @@
-# Kubernetes
+# Kubernetes on Google Cloud Platform
 This README describes how to run the Grad Bank App on Kubernetes on Google Cloud Platform.
 
 #### Building the docker images
