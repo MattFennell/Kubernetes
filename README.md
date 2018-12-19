@@ -1,8 +1,7 @@
 # Kubernetes on Google Cloud Platform
-This README describes how to run the Grad Bank App on Kubernetes on Google Cloud Platform.
+This README describes how to run the Grad Bank App using Kubernetes on Google Cloud Platform as well as locally with Minikube.
 
 #### Building the docker images
-
 Inside the `web-services` directory, run the following, replacing `username` with your docker username. This should build the Client and Service images, and then push them to DockerHub. There are more instructions for pushing images to DockerHub at https://hackernoon.com/publish-your-docker-image-to-docker-hub-10b826793faf
 
   1. `docker build -t username/web-services:latest --network=host .`
@@ -12,7 +11,6 @@ Inside the `web-ui` directory, run the following, again replacing `username` wit
   1. `docker push username/web-ui:latest`  
   
 #### Setting up Minikube locally
-
 This was a bit tricky to sort, but these are some helpers. You may need to go into the BIOS to enable Virtualisation, and you will need to enable HyperV in Windows. I essentially just followed the steps in https://learnk8s.io/blog/installing-docker-and-kubernetes-on-windows, but below is a condensed version of them (I think).
 
 1. Start cmd.exe as admin
@@ -32,17 +30,17 @@ This was a bit tricky to sort, but these are some helpers. You may need to go in
 
 
 #### Running Kubernetes locally in Minikube
-
 Assuming you can get Minikube running locally, then run the following commands from the root directory of this repo from a Git Bash terminal with Admin privileges. 
 
 1.  `minikube start --vm-driver=hyperv --hyperv-virtual-switch=minikube --v=7 --alsologtostderr`
+1.  `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/mandatory.yaml`
+1.  `minikube addons enable ingress`
 1.  `kubectl apply -f k8s` (Should see several types of files being created)
 1.  `minikube ip`
 
-And then you should be able to access the service at the IP address returned from `minikube ip`. To check that it's working, running `kubectl get pods` and you should see the client, server and sql deployments.
+And then you should be able to access the service at the IP address returned from `minikube ip`. To check that it's working, running `kubectl get pods` and you should see the client, server and sql deployments and their status. It may take a minute or 2 for the pods to load up. For more information about a pod, run `kubectl logs POD-NAME`.
 
 #### Deploying the App onto Google Cloud Platform
-
 To run it on Google, I used the in build cloud shell and cloned this git repo. Then again I ran `kubectl apply -f k8s` to start the services. However the routing for Google requires some extra setup. These commands did the trick:
 
 1. `curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh`
@@ -55,8 +53,7 @@ To run it on Google, I used the in build cloud shell and cloned this git repo. T
 1.  `helm init --service-account tiller --upgrade`
 
 
-#### Annoying issues
-
+#### Issues encountered
 Often when attempting to start or delete minikube, it would provide an error message saying that the `config.json` file cannot be found. There may be better workarounds, but my fix was achieved by following these steps.
 
 1. Disable Hyper-V and restart
