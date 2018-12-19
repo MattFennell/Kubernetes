@@ -1,5 +1,15 @@
 # Kubernetes
-Run the Grad App on Kubernetes
+This README describes how to run the Grad Bank App on Kubernetes on Google Cloud Platform. This runs off the 2 docker images stored at `pampoomio/web-ui:latest` for the Client and `pampoomio/web-services:latest` for the Service.
+
+It is initially best to get everything running in Minikube locally. 
+
+
+
+
+
+
+
+
 
 If you have Minikube working locally, then you can be in the root directory and run:
 
