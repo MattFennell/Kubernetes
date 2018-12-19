@@ -29,9 +29,9 @@ This was a bit tricky to sort, but these are some helpers. You may need to go in
 
 1. Start `cmd.exe` as admin
 1. Install Chocolatey by executing `@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"`
-1. Install docker - `choco install docker-for-windows -y`. You may need to restart laptop and enable Hyper-V
-1. This should return an empty list if it's working `docker ps`
-1. Install minikube - `choco install minikube -y`
+1. Install docker with `choco install docker-for-windows -y`. You may need to restart and enable Hyper-V
+1. Running `docker ps` should return an empty list of containers if it has been installed correctly
+1. Install minikube with `choco install minikube -y`
 1. Open Powershell as admin
 1. Run `Get-NetAdapter`
 1. Execute `New-VMSwitch –Name "minikube" –AllowManagement $True –NetAdapterName "INSERT_HERE_ADAPTER"` but enter in the correct adapter based of the names of the network adapters. I used `Ethernet`.
@@ -44,7 +44,7 @@ This was a bit tricky to sort, but these are some helpers. You may need to go in
 
 
 ### Running Kubernetes locally in Minikube
-Assuming you can get Minikube running locally, then run the following commands from the root directory of this repo from a Git Bash terminal with Admin privileges. 
+Assuming you can get Minikube running locally, then run the following commands from the root directory of this repo in a Git Bash terminal with Admin privileges. 
 
 1.  `minikube start --vm-driver=hyperv --hyperv-virtual-switch=minikube --v=7 --alsologtostderr`
 1.  `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/mandatory.yaml`
@@ -52,7 +52,8 @@ Assuming you can get Minikube running locally, then run the following commands f
 1.  `kubectl apply -f k8s` (Should see several types of files being created)
 1.  `minikube ip`
 
-And then you should be able to access the service at the IP address returned from `minikube ip`. To check that it's working, running `kubectl get pods` and you should see the client, server and sql deployments and their status. It may take a minute or two for the pods to load up. For more information about a pod, run `kubectl logs POD-NAME`. Note that this will use my images on DockerHub unless you have changed the config files and replaced them with your own.
+Now you should be able to access the service at the IP address returned from `minikube ip`. To check that it's working, run `kubectl get pods` and you should see the client, server and sql deployments and their status. It may take a minute or two for the pods to load up. 
+Note that this will use my images on DockerHub unless you have changed the config files and replaced them with your own. For more information about an individual pod, run `kubectl logs POD-NAME`. 
 
 -----
 
@@ -67,7 +68,7 @@ First you will need to create an account and set up a billing method. With Googl
 1. Master version = `1.10.9-gke.5`
 1. Number of nodes = 1
 1. Machine type = `2 vCPU` (Necessary or you'll run out of CPU)
-1. Click create and wait a few minutes for it to be created (may need to refresh page)
+1. Click create and wait a few minutes for it to be created (may need to refresh the page)
 
 
 #### Applying the config files
