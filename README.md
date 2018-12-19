@@ -1,7 +1,18 @@
 # Kubernetes on Google Cloud Platform
 This README describes how to run the Grad Bank App using Kubernetes on Google Cloud Platform as well as locally with Minikube.
 
-#### Building the docker images
+### Contents
+* [**Building the Docker images**](#building-the-docker-images)
+* [**Setting up Minikube locally**](#setting-up-minikube-locally)
+* [**Running Kubernetes locally in Minikube**](#running-kubernetes-locally-in-minikube)
+* [**Deploying the App onto Google Cloud Platform**](#deploying-the-app-onto-google-cloud-platform)
+  * [**Creating the Cluster**](#creating-the-cluster)
+  * [**Applying the Config files**](#applying-the-config-files)
+* [**Issues encountered**](#issues-encountered)
+  
+-----
+
+### Building the docker images
 Inside the `web-services` directory, run the following, replacing `username` with your docker username. This should build the Client and Service images, and then push them to DockerHub. There are more instructions for pushing images to DockerHub at https://hackernoon.com/publish-your-docker-image-to-docker-hub-10b826793faf
 
   1. `docker build -t username/web-services:latest --network=host .`
@@ -10,7 +21,7 @@ Inside the `web-ui` directory, run the following, again replacing `username` wit
   1. `docker build -t username/web-ui:latest .`
   1. `docker push username/web-ui:latest`  
   
-#### Setting up Minikube locally
+### Setting up Minikube locally
 This was a bit tricky to sort, but these are some helpers. You may need to go into the BIOS to enable Virtualisation, and you will need to enable HyperV in Windows. I essentially just followed the steps in https://learnk8s.io/blog/installing-docker-and-kubernetes-on-windows, but below is a condensed version of them (I think).
 
 1. Start `cmd.exe` as admin
@@ -29,7 +40,7 @@ This was a bit tricky to sort, but these are some helpers. You may need to go in
   - `kubectl: Correctly Configured: pointing to minikube-vm at XXX`
 
 
-#### Running Kubernetes locally in Minikube
+### Running Kubernetes locally in Minikube
 Assuming you can get Minikube running locally, then run the following commands from the root directory of this repo from a Git Bash terminal with Admin privileges. 
 
 1.  `minikube start --vm-driver=hyperv --hyperv-virtual-switch=minikube --v=7 --alsologtostderr`
@@ -40,8 +51,7 @@ Assuming you can get Minikube running locally, then run the following commands f
 
 And then you should be able to access the service at the IP address returned from `minikube ip`. To check that it's working, running `kubectl get pods` and you should see the client, server and sql deployments and their status. It may take a minute or two for the pods to load up. For more information about a pod, run `kubectl logs POD-NAME`.
 
-#### Deploying the App onto Google Cloud Platform
-
+### Deploying the App onto Google Cloud Platform
 First you will need to create an account and set up a billing method. With Google Cloud Platform you get £237.51 worth of usage for free to be used within a year (just remember to shut down all clusters once finished). 
 
 ##### Creating the Cluster
@@ -56,7 +66,7 @@ First you will need to create an account and set up a billing method. With Googl
 
 
 #### Applying the config files
-To run it on Google, I used the in built cloud shell and cloned this git repo. Then again I ran `kubectl apply -f k8s` to start the services. However the routing for Google requires some extra setup. Following these steps should deploy the app:
+Following these steps should deploy the app. Be aware that the images used may be older versions of the Grad App. If you have built your own Docker images and written your own Kubernetes configuration files, then you don't need to clone the same repo but can use your own instead.
 
 1. Once the cluster has been created, click the connect button on the right and then click `Run in Cloud Shell`.
 1. Press enter to run the auto generated command
@@ -68,11 +78,11 @@ To run it on Google, I used the in built cloud shell and cloned this git repo. T
 1. `kubectl create serviceaccount --namespace kube-system tiller`
 1. `kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller`
 1. `helm init --service-account tiller --upgrade`
-1.  `helm install stable/nginx-ingress --name my-nginx --set rbac.create=true` (May need to type this one out)
+1. `helm install stable/nginx-ingress --name my-nginx --set rbac.create=true` (May need to type this one out)
 1. `kubectl apply -f k8s`
 1. `kubectl get pods` should tell inform you if the pods are running or are pending
 1. Go to the `Services` tab on the left
-1. Click the endpoint for the row named `my-nginx-nginx-ingress-controller` and it the application should open. 
+1. Click the endpoint for the row named `my-nginx-nginx-ingress-controller` and the application should open. 
 
 If there seems to be an error, investigate the logs of the services through the CLI with kubectl, or have a look at the `workloads` tab on the left. It may say that there is not enough CPU available in which case you'll need to recreate the cluster, allocating more CPU. To stop all services, go to the `Clusters` tab on the left and delete the cluster.
 
@@ -88,4 +98,7 @@ Often when attempting to start or delete minikube, it would provide an error mes
 1. Run `New-VMSwitch –Name "minikube" –AllowManagement $True –NetAdapterName "INSERT_HERE_ADAPTER"` as before, replacing the NetAdapterName
 1. Open Git Bash as admin and run `minikube start --vm-driver=hyperv --hyperv-virtual-switch=minikube --v=7 --alsologtostderr
 `
+
+#### Current unknowns
+So far I have not yet managed to figure out how to get connect to the SQL Database stored on the Google Cloud Platform, and all of the Postman requests sent to the service return 403's so I am unable to make Categories, Payees or Transactions. I think access to this stuff is tied down by Google and requires access to be explicitly allowed.
 
