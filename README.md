@@ -74,7 +74,7 @@ To run it on Google, I used the in built cloud shell and cloned this git repo. T
 1. Go to the `Services` tab on the left
 1. Click the endpoint for the row named `my-nginx-nginx-ingress-controller` and it the application should open. 
 
-If there seems to be an error, investigate the logs of the services through the CLI with kubectl, or have a look at the `workloads` tab on the left. It may say that there is not enough CPU available in which case you'll need to recreate the cluster, allocating more CPU.
+If there seems to be an error, investigate the logs of the services through the CLI with kubectl, or have a look at the `workloads` tab on the left. It may say that there is not enough CPU available in which case you'll need to recreate the cluster, allocating more CPU. To stop all services, go to the `Clusters` tab on the left and delete the cluster.
 
 #### Issues encountered
 Often when attempting to start or delete minikube, it would provide an error message saying that the `config.json` file cannot be found. There may be better workarounds, but my fix was achieved by following these steps.
