@@ -2,6 +2,7 @@
 This README describes how to run the Grad Bank App using Kubernetes on Google Cloud Platform as well as locally with Minikube.
 
 ### Contents
+* [**Setting up Docker-For-Windows**](#setting-up-docker-for-windows)
 * [**Building the Docker images**](#building-the-docker-images)
 * [**Setting up Minikube locally**](#setting-up-minikube-locally)
 * [**Running Kubernetes locally in Minikube**](#running-kubernetes-locally-in-minikube)
@@ -12,6 +13,12 @@ This README describes how to run the Grad Bank App using Kubernetes on Google Cl
 * [**Current unknowns**](#current-unknowns)
   
 -----
+
+### Setting up Docker-For-Windows
+1. Start `cmd.exe` as admin
+1. Install Chocolatey by executing `@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"`
+1. Install docker with `choco install docker-for-windows -y`. You may need to restart and enable Hyper-V
+1. Running `docker ps` should return an empty list of containers if it has been installed correctly
 
 ### Building the docker images
 Inside the `web-services` directory, run the following, replacing `username` with your docker username. This should build the Client and Service images, and then push them to DockerHub. There are more instructions for pushing images to DockerHub at https://hackernoon.com/publish-your-docker-image-to-docker-hub-10b826793faf. This stage is not necessary as you can just use the images I have put on DockerHub.
@@ -27,10 +34,7 @@ Inside the `web-ui` directory, run the following, again replacing `username` wit
 ### Setting up Minikube locally
 This was a bit tricky to sort, but these are some helpers. You may need to go into the BIOS to enable Virtualisation, and you will need to enable HyperV in Windows. I essentially just followed the steps in https://learnk8s.io/blog/installing-docker-and-kubernetes-on-windows, but below is a condensed version of them (I think).
 
-1. Start `cmd.exe` as admin
-1. Install Chocolatey by executing `@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"`
-1. Install docker with `choco install docker-for-windows -y`. You may need to restart and enable Hyper-V
-1. Running `docker ps` should return an empty list of containers if it has been installed correctly
+
 1. Install minikube with `choco install minikube -y`
 1. Open Powershell as admin
 1. Run `Get-NetAdapter`
