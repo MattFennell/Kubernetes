@@ -110,5 +110,5 @@ Often when attempting to start or delete minikube, it would provide an error mes
 `
 
 ##### Current unknowns
-So far I have not yet managed to figure out how to get connect to the SQL Database stored on the Google Cloud Platform, and all of the Postman requests sent to the service return 403's so I am unable to make Categories, Payees or Transactions. I think access to this stuff is tied down by Google and requires access to be explicitly allowed.
+So far I have not yet managed to figure out how to get connect to the SQL Database stored on the Google Cloud Platform, and all of the Postman requests sent to the service return 403's so I am unable to make Categories, Payees or Transactions. I think access to this stuff is tied down by Google and requires access to be explicitly allowed. It would also be extremely useful to be able to access Swagger, which as of now I haven't figured out.
 
