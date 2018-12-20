@@ -19,22 +19,21 @@ spec:
       containers:
         - name: sql
           image: mariadb # https://hub.docker.com/_/mariadb/
-          ports:
+          ports: # The mariadb image exposes port 3306
             - containerPort: 3306
           volumeMounts:
-            - name: sql-storage
+            - name: sql-storage # Chooses which volume to use (referred to by the name on line 16)
               mountPath: /var/lib/mysql/data # I think mariadb by default uses /var/lib/mysql, so have added a /data directory
-          env:
-            # Not sure about all of these
+          env: # Set the necessary environment variables for the database
             - name: MYSQL_ROOT_PASSWORD # info at https://hub.docker.com/_/mariadb/
               value: passwd
-            - name: MYSQL_USER
+            - name: MYSQL_USER # Name of the root user
               value: gradapp
             - name: MYSQL_PASSWORD
               value: passwd
             - name: MYSQL_DATABASE
-              value: gradapp # name of the schema?
+              value: gradapp # name of the schema
             - name: MYSQL_ROOT_HOST
-              value: sql-cluster-ip-service
+              value: sql-cluster-ip-service # Name defined on line 4 of sql-cluster-ip-service.yaml
             - name: MYSQL_PORT
               value: "3306"

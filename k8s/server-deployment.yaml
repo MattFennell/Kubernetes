@@ -14,17 +14,15 @@ spec:
     spec:
       containers:
         - name: server
-          image: pampoomio/web-services:latest # GET BACKEND SERVER IMAGE
+          image: pampoomio/web-services:latest # My backend server image (19th Dec 2018)
           ports:
             - containerPort: 8080
           env:
-            - name: JWT_SECRET
+            - name: JWT_SECRET # Need to provide a JWT secret that is at least 64 characters long
               value: asfasdjkndskjfnkdsafjnfdskjfsdakasfnjfsakjfsankasfnafdsknfsakfasnksldgajbngsdakgdsakdsagfnkgsadgfkandsgfkjgdsankgdsajngsdak
-            - name: SPRING_DATASOURCE_PASSWORD
+            - name: SPRING_DATASOURCE_PASSWORD # Need the password specifid in the sql-deployment file in order to access the database
               value: passwd
-            - name: SPRING_DATASOURCE_URL
+            - name: SPRING_DATASOURCE_URL # Needs the address of the database
               value: jdbc:mariadb://sql-cluster-ip-service:3306/gradapp
-            - name: SPRING_DATASOURCE_USERNAME
+            - name: SPRING_DATASOURCE_USERNAME # Needs the name of the user. In this case it is the root user, as defined in the sql-deployment
               value: gradapp
-# kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/mandatory.yaml
-# minikube addons enable ingress

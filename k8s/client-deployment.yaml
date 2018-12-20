@@ -3,20 +3,22 @@ kind: Deployment
 metadata:
   name: client-deployment
 spec:
-  replicas: 1
-  selector:
+  replicas: 1 # The number of pods that the deployment makes. All are identical
+  selector: # This gives the deployment a handle on the pods that it is telling Kubernetes to make (some form of reference to them)
     matchLabels:
       component: web
-  template:
+  template: # The template defines the configuration for every pod that is created by this deployment
     metadata:
       labels:
-        component: web
+        component: web # All have a label of component: web
     spec:
       containers:
         - name: client
-          image: pampoomio/web-ui:latest # front end web-ui image
+          image: pampoomio/web-ui:latest # My frontend client image (19th Dec 2018)
           ports:
-            - containerPort: 5000
-          env:
+            - containerPort: 5000 # The client image opens port 5000
+          env: # May not be necessary
             - name: PROXY
               value: http://server-cluster-ip-service:8080
+# This deployment file runs the client in a pod
+# The image exposes port 5000, so we must map to that port

@@ -6,6 +6,6 @@ spec:
   type: ClusterIP
   selector:
     component: sql
-  ports:
+  ports: # Maps port 3306 to 3306
     - port: 3306
       targetPort: 3306

@@ -8,3 +8,6 @@ spec:
   resources:
     requests:
       storage: 2Gi # 2GB
+
+# This file describes what memory you want to claim for the database
+# Here we just claim 2GB

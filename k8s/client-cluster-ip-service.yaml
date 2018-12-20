@@ -4,8 +4,11 @@ metadata:
   name: client-cluster-ip-service
 spec:
   type: ClusterIP
-  selector:
+  selector: # This lets the ClusterIP know which set of pods it's providing access to (defined on line 13 in client-deployment)
     component: web
-  ports:
-    - port: 5000
-      targetPort: 5000
+  ports: # Port 5000 is mapped to port 5000 in the container
+    - port: 5000 # This is how other pods access the pod which is being controlled by this ClusterIP
+      targetPort: 5000 # The port on the target port that we are giving access to
+
+# This ClusterIP file governs access to the client-deployment pod. It means you can't directly access the pod from outside of the cluster
+# By accessing port 5000 on this ClusterIP, it forwards to port 5000 on the pod that it is governing

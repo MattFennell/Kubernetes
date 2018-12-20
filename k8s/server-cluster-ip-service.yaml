@@ -6,6 +6,6 @@ spec:
   type: ClusterIP
   selector:
     component: server
-  ports:
+  ports: # Maps port 8080 to port 8080 in the container
     - port: 8080
       targetPort: 8080

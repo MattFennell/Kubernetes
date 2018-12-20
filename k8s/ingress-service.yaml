@@ -4,7 +4,7 @@ metadata:
   name: ingress-service
   annotations:
     kubernetes.io/ingress.class: nginx
-    # nginx.ingress.kubernetes.io/rewrite-target: /
+    # nginx.ingress.kubernetes.io/rewrite-target: /   # This would strip /api etc out of the request
 spec:
   rules:
     - http:
@@ -21,9 +21,6 @@ spec:
             backend:
               serviceName: server-cluster-ip-service
               servicePort: 8080 # Server port
-          - path: /webjars/
-            backend:
-              serviceName: server-cluster-ip-service
-              servicePort: 8080 # Server port
 
-#https://192.168.48.192/api/swagger-ui.html
+# I'm not sure that the /swagger-ui.html path achieves anything
+# Would be nice to figure out how to access the Swagger page
