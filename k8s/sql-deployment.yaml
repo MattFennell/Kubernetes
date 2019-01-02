@@ -43,3 +43,9 @@ spec:
               value: sql-cluster-ip-service # Name defined on line 4 of sql-cluster-ip-service.yaml
             - name: MYSQL_PORT
               value: "3306"
+# This file is responsible for generating an SQL database
+# It uses the persistent volume claim and references the file (line 18)
+# Runs a mariadb image, which by default exposes port 3306
+# Stores the data in a /data directory
+# Sets up an encoded secre that must be generated explicitly
+# Sets the host as the cluster-ip-service, defined on line 4 in `sql-cluster-ip-service`

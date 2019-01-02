@@ -29,3 +29,11 @@ spec:
               value: jdbc:mariadb://sql-cluster-ip-service:3306/gradapp
             - name: SPRING_DATASOURCE_USERNAME # Needs the name of the user. In this case it is the root user, as defined in the sql-deployment
               value: gradapp
+# This deploys the back-end server image (line 17), exposing port 8080
+# It sets up several environment variables that are necessary to run the application
+# The JWT_SECRET needs to be at least 64 characters
+# It provides the correct URL for the database - based off the sql-cluster-ip-service (named on line 4 of sql-cluster-ip-service.yaml)
+# Provides the username
+
+# For the Spring Datasource Password, it uses an encoded secret that must be generated before
+# The name of the password file is `pgpassword` and it contains a key of `MYPASSWORD`, with the password as the value
