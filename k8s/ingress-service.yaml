@@ -22,5 +22,7 @@ spec:
               serviceName: server-cluster-ip-service
               servicePort: 8080 # Server port
 
+# This file essentially acts as the single point of entry to the Cluster
+# All requests come through here and are redirected based on their path
 # I'm not sure that the /swagger-ui.html path achieves anything
 # Would be nice to figure out how to access the Swagger page

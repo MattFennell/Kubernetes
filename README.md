@@ -9,8 +9,10 @@ This README describes how to run the Grad Bank App using Kubernetes on Google Cl
 - [**Setting up Minikube locally**](#setting-up-minikube-locally)
 - [**Running Kubernetes locally in Minikube**](#running-kubernetes-locally-in-minikube)
 - [**Deploying the App onto Google Cloud Platform**](#deploying-the-app-onto-google-cloud-platform)
+  - [**Creating a Project**](#creating-a-project)
   - [**Creating the Cluster**](#creating-the-cluster)
   - [**Applying the Config files**](#applying-the-config-files)
+  - [**Prevent further billing**](#prevent-further-billing)
 - [**Issues encountered**](#issues-encountered)
 - [**Current unknowns**](#current-unknowns)
 
@@ -58,6 +60,7 @@ Assuming you can get Minikube running locally, then run the following commands f
 1.  `minikube start --vm-driver=hyperv --hyperv-virtual-switch=minikube --v=7 --alsologtostderr`
 1.  `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/mandatory.yaml`
 1.  `minikube addons enable ingress`
+1.  `kubectl create secret generic pgpassword --from-literal MYPASSWORD=12345asdf` (Can change the password if desired)
 1.  `kubectl apply -f k8s` (Should see several types of files being created)
 1.  `minikube ip`
 
@@ -70,9 +73,17 @@ Note that this will use my images on DockerHub unless you have changed the confi
 
 First you will need to create an account and set up a billing method. With Google Cloud Platform you get £237.51 worth of usage for free to be used within a year (just remember to shut down all clusters once finished).
 
+##### Creating a Project
+
+Dependent on your account, you may or may not already have an existing project. If you don't, you will need to create one.
+
+1. Go to https://console.cloud.google.com/projectselector/home
+1. Create a project and give it a relevant name as you can't change this after creation
+1. You can toggle the active project via the dropdown in the top left
+
 ##### Creating the Cluster
 
-1. Go to the Kubernetes Engine page and click `Create cluster`
+1. Go to the Kubernetes Engine Clusters page and click `Create cluster`
 1. Name it as you like.
 1. Location type = `Zonal`
 1. Zone = `europe-west1-b`
@@ -96,12 +107,17 @@ Following these steps should deploy the app. Be aware that the images used may b
 1. `kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller`
 1. `helm init --service-account tiller --upgrade`
 1. `helm install stable/nginx-ingress --name my-nginx --set rbac.create=true` (May need to type this one out)
+1. `kubectl create secret generic pgpassword --from-literal MYPASSWORD=12345asdf` (Can change the password if desired) - This should show up in the Configuration tab on the left with the name pgpassword
 1. `kubectl apply -f k8s`
 1. `kubectl get pods` should tell inform you if the pods are running or are pending
 1. Go to the `Services` tab on the left
 1. Click the endpoint for the row named `my-nginx-nginx-ingress-controller` and the application should open.
 
-If there seems to be an error, investigate the logs of the services through the CLI with kubectl, or have a look at the `workloads` tab on the left. It may say that there is not enough CPU available in which case you'll need to recreate the cluster, allocating more CPU. To stop all services, go to the `Clusters` tab on the left and delete the cluster.
+If there seems to be an error, investigate the logs of the services through the CLI with kubectl, or have a look at the `workloads` tab on the left. It may say that there is not enough CPU available in which case you'll need to recreate the cluster, allocating more CPU.
+
+#### Prevent further billing
+
+To stop all services, go to the `Clusters` tab on the left and delete the cluster. Then to delete the project, click the project selector at the top left of the page and click on the three dots on the right at the end of the row and delete the project. This is necessary to ensure that all billing is cancelled.
 
 #### Issues encountered
 
