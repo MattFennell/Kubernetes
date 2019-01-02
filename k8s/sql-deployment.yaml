@@ -26,11 +26,17 @@ spec:
               mountPath: /var/lib/mysql/data # I think mariadb by default uses /var/lib/mysql, so have added a /data directory
           env: # Set the necessary environment variables for the database
             - name: MYSQL_ROOT_PASSWORD # info at https://hub.docker.com/_/mariadb/
-              value: passwd
+              valueFrom: # This accesses an encoded secret that has already been created
+                secretKeyRef:
+                  name: pgpassword # Comes from the command :  kubectl create secret generic pgpassword --from-literal MYPASSWORD='insert password here'
+                  key: MYPASSWORD # This is the key, that also comes from the command above
             - name: MYSQL_USER # Name of the root user
               value: gradapp
             - name: MYSQL_PASSWORD
-              value: passwd
+              valueFrom:
+                secretKeyRef:
+                  name: pgpassword # Same as above. Could have a different root password?
+                  key: MYPASSWORD
             - name: MYSQL_DATABASE
               value: gradapp # name of the schema
             - name: MYSQL_ROOT_HOST
